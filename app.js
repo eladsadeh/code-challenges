@@ -34,9 +34,9 @@ function tribonacci(signature, n) {
 // console.log(tribonacci([1, 1, 1], 0));
 
 function XO(string) {
-	const x = string.split('').filter((c) => c.toLowerCase() === 'x').length;
-	const o = string.split('').filter((c) => c.toLowerCase() === 'o').length;
-	return x === o;
+	const arr = string.split('');
+	return arr.filter((c) => c.toLowerCase() === 'x').length
+	=== arr.filter((c) => c.toLowerCase() === 'o').length;
 }
 
-console.log(XO('ooooxxx'));
+// console.log(XO('zzzbbb'));
