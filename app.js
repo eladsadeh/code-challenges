@@ -10,9 +10,33 @@ function persistence(num) {
 // Jaden-Cased:     "How Can Mirrors Be Real If Our Eyes Aren't Real"
 
 const toJadenCase = function (string) {
-
-	console.log(string.split(' ').map((word) => word.replace(word[0],word[0].toUpperCase())).join(' '))
-	
+	console.log(
+		string
+			.split(' ')
+			.map((word) => word.replace(word[0], word[0].toUpperCase()))
+			.join(' ')
+	);
 };
 
-toJadenCase('How can mirrors be real if our eyes aren\'t real')
+// toJadenCase('How can mirrors be real if our eyes aren\'t real')
+
+// Tribonacci: return array length n with tribonacci series beginning with a seed array: ([0,1,2],5) => [0,1,2,3,6]
+function tribonacci(signature, n) {
+	if (n < 3) return signature.splice(0, n);
+	while (signature.length < n) {
+		signature.push(
+			signature.slice(signature.length - 3).reduce((acc, val) => acc + val)
+		);
+	}
+	return signature;
+}
+
+// console.log(tribonacci([1, 1, 1], 0));
+
+function XO(string) {
+	const x = string.split('').filter((c) => c.toLowerCase() === 'x').length;
+	const o = string.split('').filter((c) => c.toLowerCase() === 'o').length;
+	return x === o;
+}
+
+console.log(XO('ooooxxx'));
