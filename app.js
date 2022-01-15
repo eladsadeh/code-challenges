@@ -40,3 +40,9 @@ function XO(string) {
 }
 
 // console.log(XO('zzzbbb'));
+
+function binaryToNum(arr) {
+	console.log(arr.reduce((acc,val,idx) => acc + val * 2 ** (arr.length - idx -1),0));
+}
+
+binaryToNum([0,1,1,0])
