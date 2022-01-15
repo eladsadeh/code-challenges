@@ -41,8 +41,21 @@ function XO(string) {
 
 // console.log(XO('zzzbbb'));
 
+
+// Given an array of ones and zeroes, convert the equivalent binary value to an integer.
+// Eg: [0, 0, 0, 1] is treated as 0001 which is the binary representation of 1.
+
 function binaryToNum(arr) {
 	console.log(arr.reduce((acc,val,idx) => acc + val * 2 ** (arr.length - idx -1),0));
 }
+const binaryArrayToNumber = (arr) => parseInt(arr.join(''), 2);
 
-binaryToNum([0,1,1,0])
+// console.log(binaryArrayToNumber([1, 1, 1, 0]));
+
+// moveZeros([false,1,0,1,2,0,1,3,"a"]) // returns[false,1,1,2,1,3,"a",0,0]
+function moveZeros(arr) {
+	console.log(Array(...arr.filter((e) => e !== 0), ...arr.filter((e) => e === 0)));
+	return arr;
+	
+}
+// moveZeros([false,1,0,1,2,0,1,3,"a"]) // returns[false,1,1,2,1,3,"a",0,0]
