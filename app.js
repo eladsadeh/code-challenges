@@ -85,4 +85,12 @@ function whoLikesIt(arr) {
 	console.log(answers[arr.length > 4 ? 4 : arr.length]);
 }
 
-whoLikesIt(['Elad', 'Alex', 'Jacob']);
+// whoLikesIt(['Elad', 'Alex', 'Jacob','anthony']);
+
+function findTheOddInt(arr) {
+	const odds = arr.filter(el => el %2);
+	console.log(odds);
+	return odds.length === 1 ? odds[0] : arr.filter(el => ! (el % 2))[0];
+}
+
+console.log(findTheOddInt([1,5,11,5,14]));
