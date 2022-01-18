@@ -88,9 +88,38 @@ function whoLikesIt(arr) {
 // whoLikesIt(['Elad', 'Alex', 'Jacob','anthony']);
 
 function findTheOddInt(arr) {
-	const odds = arr.filter(el => el %2);
+	const odds = arr.filter((el) => el % 2);
 	console.log(odds);
-	return odds.length === 1 ? odds[0] : arr.filter(el => ! (el % 2))[0];
+	return odds.length === 1 ? odds[0] : arr.filter((el) => !(el % 2))[0];
 }
 
-console.log(findTheOddInt([1,5,11,5,14]));
+// console.log(findTheOddInt([1,5,11,5,14]));
+
+function productFib(prod) {
+	const fib = [0, 1];
+	while (fib[0] * fib[1] < prod) fib.push(fib.shift() + fib[0]);
+
+	console.log([fib[0], fib[1], fib[0] * fib[1] === prod]);
+}
+
+// productFib(273);
+
+function intToRoman(int) {
+	const digits = `${int}`.split('');
+	const translation = [];
+	const translate = [
+		['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'],
+		['', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC'],
+		['', 'C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM'],
+	];
+
+	if (int > 999) {
+		translation.push('M'.repeat(digits.slice(0, digits.length - 3).join('')));
+	}
+	for (i = Math.min(digits.length - 1, 2); i >= 0; i--) {
+		translation.push(translate[i][digits[digits.length - i - 1]]);
+	}
+	return translation.join('');
+}
+
+console.log(intToRoman(1990)); 
