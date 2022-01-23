@@ -122,4 +122,67 @@ function intToRoman(int) {
 	return translation.join('');
 }
 
-console.log(intToRoman(1990)); 
+// console.log(intToRoman(1990));
+
+// Return: a string formatted as a list of names separated by commas except for the last two names, which should be separated by an ampersand.
+// list([ {name: 'Bart'}, {name: 'Lisa'}, {name: 'Maggie'} ])
+// returns 'Bart, Lisa & Maggie'
+
+function printNames(list) {
+	return !list.length
+		? ''
+		: list.reduce(
+				(acc, val, idx) =>
+					idx === list.length - 1
+						? `${acc} & ${val.name}`
+						: `${acc}, ${val.name}`,
+				list.shift().name
+		  );
+}
+
+// console.log(printNames([]));
+
+function countSmileys(arr) {
+	// return arr.reduce((acc, val) =>
+	// 	!!/[:|;][-|~]*[)|D]/.exec(val) ? ++acc : acc, 0
+	return arr.reduce((acc, val) =>
+		!!val.match(/[:|;][-|~]*[)|D]/) ? ++acc : acc, 0
+	);
+}
+
+// console.log(countSmileys([]));
+
+
+// Move the first letter of each word to the end of it, then add "ay" to the end of the word. Leave punctuation marks untouched.
+//pigIt('Pig latin is cool'); // igPay atinlay siay oolcay
+
+function pigIt(string) {
+	return string.split(' ').map((word) => 
+		 /[a-z]/i.test(word[0]) ?
+			 word.split('').splice(1).concat([word[0],'ay']).join('') :
+			 word
+	).join(' ');
+}
+
+//   return str.replace(/(\w)(\w*)(\s|$)/g, '$2$1ay$3');
+
+
+// console.log(pigIt('Hello world !'));
+
+// ┌───┬───┬───┐
+// │ 1 │ 2 │ 3 │
+// ├───┼───┼───┤
+// │ 4 │ 5 │ 6 │
+// ├───┼───┼───┤
+// │ 7 │ 8 │ 9 │
+// └───┼───┼───┘
+//     │ 0 │
+//     └───┘
+
+//    "8": ["5", "7", "8", "9", "0"],
+    // "11": ["11", "22", "44", "12", "21", "14", "41", "24", "42"],
+    // "369": ["339","366","399","658","636","258","268","669","668","266","369","398","256","296","259","368","638","396","238","356","659","639","666","359","336","299","338","696","269","358","656","698","699","298","236","239"]
+
+function getPINs(observed) {
+	const possibilities = [[0,8],[1,2,4],[1,2,3,5],[2,3,6],[1,4,5,7],[2,4,5,6,8],[3,5,6,9],[4,7,8],[0,5,7,8,9],[6,8,9]];
+}
