@@ -247,11 +247,12 @@ function humanReadable(seconds) {
 
 
 function incrementString(strng) {
-	const end = /([0-9])$/.exec(strng);
-	console.log(end);
+	let [string,num] = /([a-z]+)([0-9]+)$/i.exec(strng);
+	num = parseInt(num)
+	console.log(string, num, ++num);
 	if(!/([0-9])$/.test(strng)) return `${strng}1`;
 	return strng;
 
 }
 
-console.log(incrementString('foo9'));
+console.log(incrementString('foo0048'));
