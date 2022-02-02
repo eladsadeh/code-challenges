@@ -145,27 +145,29 @@ function printNames(list) {
 function countSmileys(arr) {
 	// return arr.reduce((acc, val) =>
 	// 	!!/[:|;][-|~]*[)|D]/.exec(val) ? ++acc : acc, 0
-	return arr.reduce((acc, val) =>
-		!!val.match(/[:|;][-|~]*[)|D]/) ? ++acc : acc, 0
+	return arr.reduce(
+		(acc, val) => (!!val.match(/[:|;][-|~]*[)|D]/) ? ++acc : acc),
+		0
 	);
 }
 
 // console.log(countSmileys([]));
 
-
 // Move the first letter of each word to the end of it, then add "ay" to the end of the word. Leave punctuation marks untouched.
 //pigIt('Pig latin is cool'); // igPay atinlay siay oolcay
 
 function pigIt(string) {
-	return string.split(' ').map((word) => 
-		 /[a-z]/i.test(word[0]) ?
-			 word.split('').splice(1).concat([word[0],'ay']).join('') :
-			 word
-	).join(' ');
+	return string
+		.split(' ')
+		.map((word) =>
+			/[a-z]/i.test(word[0])
+				? word.split('').splice(1).concat([word[0], 'ay']).join('')
+				: word
+		)
+		.join(' ');
 }
 
 //   return str.replace(/(\w)(\w*)(\s|$)/g, '$2$1ay$3');
-
 
 // console.log(pigIt('Hello world !'));
 
@@ -180,9 +182,76 @@ function pigIt(string) {
 //     └───┘
 
 //    "8": ["5", "7", "8", "9", "0"],
-    // "11": ["11", "22", "44", "12", "21", "14", "41", "24", "42"],
-    // "369": ["339","366","399","658","636","258","268","669","668","266","369","398","256","296","259","368","638","396","238","356","659","639","666","359","336","299","338","696","269","358","656","698","699","298","236","239"]
+// "11": ["11", "22", "44", "12", "21", "14", "41", "24", "42"],
+// "369": ["339","366","399","658","636","258","268","669","668","266","369","398","256","296","259","368","638","396","238","356","659","639","666","359","336","299","338","696","269","358","656","698","699","298","236","239"]
+
+// '13' => [[1, 2, 4],[2, 3, 6]]
+// 12,13,16,22,23,26,42,43,46
+// '130' => [[1, 2, 4],[2, 3, 6],[0,8]]
+// 12,13,16,22,23,26,42,43,46
+// 120,130,160,220,230,260,420,430,460,128,138,168,228,239,268,428,438,468
 
 function getPINs(observed) {
-	const possibilities = [[0,8],[1,2,4],[1,2,3,5],[2,3,6],[1,4,5,7],[2,4,5,6,8],[3,5,6,9],[4,7,8],[0,5,7,8,9],[6,8,9]];
+	const possibilities = {
+		0: ['0', '8'],
+		1: ['1', '2', '4'],
+		2: ['1', '2', '3', '5'],
+		3: ['2', '3', '6'],
+		4: ['1', '4', '5', '7'],
+		5: ['2', '4', '5', '6', '8'],
+		6: ['3', '5', '6', '9'],
+		7: ['4', '7', '8'],
+		8: ['0', '5', '7', '8', '9'],
+		9: ['6', '8', '9'],
+	};
+
+	return observed.split('').reduce(
+		(acc, val) => {
+			const tmpArr = [];
+			for (i = 0; i < acc.length; i++) {
+				for (j = 0; j < possibilities[val].length; j++) {
+					tmpArr.push(`${acc[i]}${possibilities[val][j]}`);
+				}
+			}
+			return tmpArr;
+		},
+		['']
+	);
+	// acc.map(a => possibilities[val].map(b => `${a}${b}`)).flat(),[''])
 }
+
+function combineArrays(arr1, arr2) {
+	console.log(arr1, arr2);
+	return arr1.map((a) => arr2.map((b) => `${a}${b}`));
+}
+
+// console.log(getPINs('345'));
+// console.log(combineArrays([8], [2, 3, 6]));
+
+function humanReadable(seconds) {
+	const hours = Math.floor(seconds / 3600);
+	const minutes = Math.floor((seconds - 3600 * hours) / 60);
+	seconds = seconds - 60 * minutes - 3600 * hours;
+	return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(
+		2,
+		'0'
+	)}:${String(seconds).padStart(2, '0')}`;
+}
+
+// console.log(humanReadable(3689));
+
+// write a function which increments a string, to create a new string.
+
+// If the string already ends with a number, the number should be incremented by 1.
+// If the string does not end with a number. the number 1 should be appended to the new string.
+
+
+function incrementString(strng) {
+	const end = /([0-9])$/.exec(strng);
+	console.log(end);
+	if(!/([0-9])$/.test(strng)) return `${strng}1`;
+	return strng;
+
+}
+
+console.log(incrementString('foo9'));
