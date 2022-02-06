@@ -21,14 +21,6 @@ def spin_words(sentence):
 # Your task is to write a function maskify, which changes all but the last four characters into '#'.
 
 def maskify(string):
-    masked = string
-    for idx, c in enumerate(string):
-        if idx < len(string) - 4:
-            print(idx, c)
-            masked.replace('1', "#")
-   
-    print(masked)
-    # return string if len(string) < 5 else string.replace('*', "#"[len(string) - 4])
+    return (len(string)-4) * '#' + string[-4:]
 
-
-print(maskify('123456'))
+print(maskify(''))
