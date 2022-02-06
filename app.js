@@ -245,7 +245,6 @@ function humanReadable(seconds) {
 // If the string already ends with a number, the number should be incremented by 1.
 // If the string does not end with a number. the number 1 should be appended to the new string.
 
-
 function incrementString(strng) {
 	console.log(/([0-8]|\d?9+)?$/.exec(strng));
 	let m = /^([a-z]*)([0-9]+)$/i.exec(strng);
@@ -258,5 +257,38 @@ function incrementString(strng) {
 // let incrementString = (str) =>
 // 	str.replace(/([0-8]|\d?9+)?$/, (e) => (e ? +e + 1 : 1));
 
+// console.log(incrementString('xx3x199'));
 
-console.log(incrementString('xx3x199'));
+function add(a, b) {
+	function addStrings(a, b) {
+		const len = Math.max(a.length, b.length);
+		let carry = 0;
+		let addition = new Array(len).fill(0)
+		a = a.padStart(len, '0').split('');
+		b = b.padStart(len, '0').split('');
+		for(i=len-1 ; i>=0; i--) {
+			addition[i] = (Number(a[i]) + Number(b[i]) + carry) % 10;
+			carry = Math.floor((Number(a[i]) + Number(b[i]) + carry) / 10);
+		}
+		return addition.join('');
+	}
+	return Number.MAX_SAFE_INTEGER > b + a
+		? `${Number(a) + Number(b)}`
+		: addStrings(a, b);
+}
+
+// Solution from codewars
+
+function add(a, b) {
+	var res = '',
+		c = 0;
+	a = a.split('');
+	b = b.split('');
+	while (a.length || b.length || c) {
+		c += ~~a.pop() + ~~b.pop();
+		res = (c % 10) + res;
+		c = c > 9;
+	}
+	return res;
+}
+// console.log(add('63829983432984289347293874', '90938498237058927340892374089'));
