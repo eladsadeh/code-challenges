@@ -247,13 +247,11 @@ function humanReadable(seconds) {
 
 
 function incrementString(strng) {
+	console.log(/([0-8]|\d?9+)?$/.exec(strng));
 	let m = /^([a-z]*)([0-9]+)$/i.exec(strng);
 	return m
 		? `${m[1]}${String(++m[2]).padStart(strng.length - m[1].length, '0')}`
 		: `${strng}1`;
-	// if(!/([0-9])$/.test(strng)) return `${strng}1`;
-	// return strng;
-
 }
 
 // From codewars
@@ -261,4 +259,4 @@ function incrementString(strng) {
 // 	str.replace(/([0-8]|\d?9+)?$/, (e) => (e ? +e + 1 : 1));
 
 
-// console.log(incrementString('1'));
+console.log(incrementString('xx3x199'));
