@@ -23,4 +23,20 @@ def spin_words(sentence):
 def maskify(string):
     return (len(string)-4) * '#' + string[-4:]
 
-print(maskify(''))
+# print(maskify(''))
+
+# input =  [[18, 20], [45, 2], [61, 12], [37, 6], [21, 21], [78, 9]]
+# output = ["Open", "Open", "Senior", "Open", "Open", "Senior"]
+
+def open_or_senior(data):
+    output = []
+    for person in data:
+        output.append("Senior" if person[0] >=55 and person[1] > 7 else "Open")
+
+    return output
+
+# Solution from codewars
+def openOrSenior(data):
+  return ["Senior" if age >= 55 and handicap >= 8 else "Open" for (age, handicap) in data]
+
+print(openOrSenior([[18, 20], [45, 2], [61, 12], [37, 6], [21, 21], [78, 9]]))
