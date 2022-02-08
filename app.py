@@ -46,7 +46,7 @@ def openOrSenior(data):
 def shortest_word(string):
     return min([len(w) for w in string.split()])
 
-print(shortest_word("It don't think that word means what you think it means"))
+# print(shortest_word("It don't think that word means what you think it means"))
 
 def sum_of_minimums(list):
     return sum([min(l) for l in list])
@@ -68,12 +68,38 @@ def split_strings(s):
 # def solution(s):
 #     return re.findall(".{2}", s + "_")
    
-    
-
-print(split_strings('xyaappldldo'))
-# should return ['ab', 'c_']
-
-
-
-print(split_strings('abcdef'))
+# print(split_strings('xyaappldldo'))
+# # should return ['ab', 'c_']
+# print(split_strings('abcdef'))
 # should return ['ab', 'cd', 'ef']
+
+# You are going to be given a word. Your job is to return the middle character of the word. If the word's length is odd, return the middle character. If the word's length is even, return the middle 2 characters.
+
+def print_middle(word):
+    print(len(word))
+    print(int((len(word)-1)/2))
+
+    print(word[(len(word)-1)/2] if (len(word)-1)%2 == 0 else word[(len(word)-2)/2])
+
+# print_middle('abc')
+
+# removes the first and last character of a string.
+def remove_char(s):
+    return s[1:-1]
+
+# print(remove_char('eloquent')) # -> 'loquen'
+
+# Find the greatest common divisor of two positive integers without using a Python library.
+
+def mygcd(x,y):
+    d = 2
+    gcd = 1
+    while d * 2 <= min(x,y):
+        if x % d == 0 and  y% d == 0:
+            gcd = d
+        d += 1
+
+    return gcd
+
+print(mygcd(30,12))
+print(mygcd(15713250,10063368))
