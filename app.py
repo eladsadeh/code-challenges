@@ -91,16 +91,20 @@ def remove_char(s):
 
 # Find the greatest common divisor of two positive integers without using a Python library.
 
+# def mygcd(x,y):
+#     d = int(max(x,y,2)/2)
+#     while d:
+#         if x % d == 0 and  y% d == 0:
+#             return int(d)
+#         d -= 1
+
 def mygcd(x,y):
-    d = int(max(x,y,2)/2)
-    while d:
-        if x % d == 0 and  y% d == 0:
-            return int(d)
-        d -= 1
+    while y:
+        x, y = y, x%y
+    return x
 
-
-# print(mygcd(30,5))
-# print(mygcd(15713250,10063368))
+print(mygcd(30,1))
+print(mygcd(15713250,10063368))
 
 # Given a string of words, you need to find the highest scoring word. Each letter of a word scores points according to its position in the alphabet: a = 1, b = 2, c = 3 etc.
 
@@ -114,6 +118,10 @@ def highest(s):
             high_word = word
     return high_word
 
-print(highest('man i need a taxi up to ubud')) # -> 'taxi'
-print(highest('what time are we climbing up the volcano')) # -> 'volcano'
-print(highest('take me to semynak')) # -> 'semynak'
+# Codewars solution
+def high(x):
+    return max(x.split(), key=lambda k: sum(ord(c) - 96 for c in k))
+
+# print(highest('man i need a taxi up to ubud')) # -> 'taxi'
+# print(highest('what time are we climbing up the volcano')) # -> 'volcano'
+# print(highest('take me to semynak')) # -> 'semynak'
