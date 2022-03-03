@@ -394,8 +394,33 @@ function timeConversion(s) {
 // timeConversion('11:01:34PM');
 
 function matchingStrings(strings, queries) {
-	 const result = queries.map((e) => strings.filter((s) => s === e).length)
+	const result = queries.map((e) => strings.filter((s) => s === e).length);
 	console.log(result);
 }
 
-matchingStrings(['ab', 'abc', 'ad', 'ab'], ['ab', 'ad', 'abc'])
+// matchingStrings(['ab', 'abc', 'ad', 'ab'], ['ab', 'ad', 'abc'])
+
+function equalStacks(h1, h2, h3) {
+	let hn = [[...h1], [...h2], [...h3]];
+	// check the height of all arrays
+	let heights = hn.map((h) => h.reduce((s, e) => e + s, 0));
+	// let max = Math.max(...heights);
+	while (heights.some((e) => e !== Math.max(...heights))) {
+		if (!Math.min(...heights)) return 0;
+		// if the heights are equal, return the height
+		// if (heights.every((e) => e === max)) return max;
+		// find the highst array
+		const idx = heights.indexOf(Math.max(...heights));
+		// remove the top most element from the highest array
+		heights[idx] -= hn[idx].shift();
+		// heights = hn.map((h) => h.reduce((s, e) => e + s, 0));
+		// max = Math.max(...heights);
+	}
+	return heights[0];
+	// check again
+	// return equalStacks(...hn);
+}
+
+console.log(equalStacks([3, 2, 1, 1, 1], [4, 3, 2], [1, 1, 4, 1]));
+// console.log(equalStacks([2, 1, 1, 1], [3, 2], [4, 1]));
+console.log(equalStacks([1,1,1,1,2], [3,7], [1,3,1]));
