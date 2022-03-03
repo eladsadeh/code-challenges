@@ -263,10 +263,10 @@ function add(a, b) {
 	function addStrings(a, b) {
 		const len = Math.max(a.length, b.length);
 		let carry = 0;
-		let addition = new Array(len).fill(0)
+		let addition = new Array(len).fill(0);
 		a = a.padStart(len, '0').split('');
 		b = b.padStart(len, '0').split('');
-		for(i=len-1 ; i>=0; i--) {
+		for (i = len - 1; i >= 0; i--) {
 			addition[i] = (Number(a[i]) + Number(b[i]) + carry) % 10;
 			carry = Math.floor((Number(a[i]) + Number(b[i]) + carry) / 10);
 		}
@@ -292,3 +292,155 @@ function add(a, b) {
 	return res;
 }
 // console.log(add('63829983432984289347293874', '90938498237058927340892374089'));
+
+// Nesting Structure Comparison
+
+Array.prototype.sameStructureAs = function (other) {
+	if (!isArray(other)) return false;
+	const isSameStructure = (a1, a2) => {
+		if (a1.length !== a2.length) return false;
+		for (i = 0; i < a1.length; i++) {
+			// if both elements are arrays, check their structure
+			if (isArray(a1[i]) && isArray(a2[i]))
+				return isSameStructure(a1[i], a2[i]);
+			// If one array and the other not, return false
+			else if (isArray(a1[i]) !== isArray(a2[i])) return false;
+			// if both not array, move to next element;
+		}
+		return true;
+	};
+	return isSameStructure(this, other);
+};
+
+// Codewars top solution
+// Array.prototype.sameStructureAs = function (other) {
+// 	return this.length === other.length
+// 		? this.every(function (el, i) {
+// 				return Array.isArray(el) ? el.sameStructureAs(other[i]) : true;
+// 		  })
+// 		: false;
+// };
+
+// [a,a,a] , [[a], a, a]
+// 'a' : ['a'] -> true
+// 'a' : 'a' -> true
+// 'a' : 'a' -> true
+
+// Alphabetic Anagrams
+// Given a word, return its position in all posible combinations of the same letters, sorted alphabethically
+// Sample words, with their rank:
+// ABAB = 2
+// AAAB = 1
+// BAAA = 4
+// QUESTION = 24572
+// BOOKKEEPER = 10743
+
+function listPosition(word) {
+	// create array of the letters
+	const chars = word.toUpperCase().split('').sort();
+	// array of unique letters
+	// const unique = [...new Set(chars)];
+	// create an array of all possiblities
+	let all = [];
+	// chars.forEach((a, i) => {
+	// 	// chars.forEach((b, j) => {
+	// 	// 	if(i !== j)
+	// 	// })
+	// })
+
+	// perform binary search to find the index of word
+	console.log(chars, unique);
+	return 1;
+}
+
+// generate all unique combinations whan edding a character to existing array of combinations
+const uniqueCombinations = (arr, char) => {
+	// go throug all elements in arr
+	// arr.reduce((el) => {
+	// 	el.split('').map((c) => )
+	// })
+};
+
+// console.log(listPosition('abba'));
+function plusMinus(arr) {
+	zeros = arr.filter((e) => e === 0).length;
+	pos = arr.filter((e) => e > 0).length;
+	neg = arr.filter((e) => e < 0).length;
+
+	[pos, neg, zeros].forEach((n) => {
+		console.log((n / arr.length).toFixed(6));
+	});
+}
+
+// plusMinus([-4, 3, -9, 0, 4, 1])
+
+function miniMaxSum(arr) {
+	const sum = arr.reduce((s, e) => s + e);
+	const max = sum - Math.min(...arr);
+	const min = sum - Math.max(...arr);
+	console.log(max, min);
+}
+
+// miniMaxSum([1,3,5,7,9])
+
+function timeConversion(s) {
+	let [time, hour, min, ampm] = s.match(/(\d\d):(\d\d:\d\d)([a|p])m/i);
+	if (hour === '12' && ampm === 'A') hour = '00';
+	else if (ampm === 'P' && hour !== '12')
+		hour = (Number(hour) + 12).toString().padStart(2, '0');
+	return hour + ':' + min;
+}
+
+// timeConversion('11:01:34PM');
+
+function matchingStrings(strings, queries) {
+	const result = queries.map((e) => strings.filter((s) => s === e).length);
+	console.log(result);
+}
+
+// matchingStrings(['ab', 'abc', 'ad', 'ab'], ['ab', 'ad', 'abc'])
+
+function equalStacks(h1, h2, h3) {
+	let hn = [[...h1], [...h2], [...h3]];
+	// check the height of all arrays
+	let heights = hn.map((h) => h.reduce((s, e) => e + s, 0));
+	// let max = Math.max(...heights);
+	while (heights.some((e) => e !== Math.max(...heights))) {
+		if (!Math.min(...heights)) return 0;
+		// if the heights are equal, return the height
+		// if (heights.every((e) => e === max)) return max;
+		// find the highst array
+		const idx = heights.indexOf(Math.max(...heights));
+		// remove the top most element from the highest array
+		heights[idx] -= hn[idx].shift();
+		// heights = hn.map((h) => h.reduce((s, e) => e + s, 0));
+		// max = Math.max(...heights);
+	}
+	return heights[0];
+	// check again
+	// return equalStacks(...hn);
+}
+
+// console.log(equalStacks([3, 2, 1, 1, 1], [4, 3, 2], [1, 1, 4, 1]));
+// console.log(equalStacks([2, 1, 1, 1], [3, 2], [4, 1]));
+// console.log(equalStacks([1,1,1,1,2], [3,7], [1,3,1]));
+
+function maxSubarray(arr) {
+	// The maximum possible of any subset is all possitive numbers
+	let subset = arr.reduce((s,e) => e > 0 ? e +s : s, 0);
+	subset = subset ? subset : Math.max(...arr);
+	console.log(subset);
+	// find the max subsequence foreach index
+	let maxSeq = prevMax = arr[0];
+	console.log(maxSeq, prevMax);
+	for(i = 1; i < arr.length; i++) {
+		// maxSeq[i] = Math.max(maxSeq[i-1], arr[i-1] + arr[i], arr[i])
+		maxSeq = Math.max(maxSeq, prevMax + arr[i], arr[i])
+		prevMax = Math.max(prevMax + arr[i], arr[i])
+		// arr[i] = Math.max(arr[i - 1] + arr[i], arr[i]);
+		console.log(maxSeq, prevMax);
+	}
+	console.log([maxSeq, subset]);
+}
+
+maxSubarray([-2,-3,-1,-4,-6])
