@@ -421,6 +421,26 @@ function equalStacks(h1, h2, h3) {
 	// return equalStacks(...hn);
 }
 
-console.log(equalStacks([3, 2, 1, 1, 1], [4, 3, 2], [1, 1, 4, 1]));
+// console.log(equalStacks([3, 2, 1, 1, 1], [4, 3, 2], [1, 1, 4, 1]));
 // console.log(equalStacks([2, 1, 1, 1], [3, 2], [4, 1]));
-console.log(equalStacks([1,1,1,1,2], [3,7], [1,3,1]));
+// console.log(equalStacks([1,1,1,1,2], [3,7], [1,3,1]));
+
+function maxSubarray(arr) {
+	// The maximum possible of any subset is all possitive numbers
+	let subset = arr.reduce((s,e) => e > 0 ? e +s : s, 0);
+	subset = subset ? subset : Math.max(...arr);
+	console.log(subset);
+	// find the max subsequence foreach index
+	let maxSeq = prevMax = arr[0];
+	console.log(maxSeq, prevMax);
+	for(i = 1; i < arr.length; i++) {
+		// maxSeq[i] = Math.max(maxSeq[i-1], arr[i-1] + arr[i], arr[i])
+		maxSeq = Math.max(maxSeq, prevMax + arr[i], arr[i])
+		prevMax = Math.max(prevMax + arr[i], arr[i])
+		// arr[i] = Math.max(arr[i - 1] + arr[i], arr[i]);
+		console.log(maxSeq, prevMax);
+	}
+	console.log([maxSeq, subset]);
+}
+
+maxSubarray([-2,-3,-1,-4,-6])
