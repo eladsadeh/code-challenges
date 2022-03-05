@@ -427,20 +427,94 @@ function equalStacks(h1, h2, h3) {
 
 function maxSubarray(arr) {
 	// The maximum possible of any subset is all possitive numbers
-	let subset = arr.reduce((s,e) => e > 0 ? e +s : s, 0);
+	let subset = arr.reduce((s, e) => (e > 0 ? e + s : s), 0);
 	subset = subset ? subset : Math.max(...arr);
 	console.log(subset);
 	// find the max subsequence foreach index
-	let maxSeq = prevMax = arr[0];
+	let maxSeq = (prevMax = arr[0]);
 	console.log(maxSeq, prevMax);
-	for(i = 1; i < arr.length; i++) {
+	for (i = 1; i < arr.length; i++) {
 		// maxSeq[i] = Math.max(maxSeq[i-1], arr[i-1] + arr[i], arr[i])
-		maxSeq = Math.max(maxSeq, prevMax + arr[i], arr[i])
-		prevMax = Math.max(prevMax + arr[i], arr[i])
+		maxSeq = Math.max(maxSeq, prevMax + arr[i], arr[i]);
+		prevMax = Math.max(prevMax + arr[i], arr[i]);
 		// arr[i] = Math.max(arr[i - 1] + arr[i], arr[i]);
 		console.log(maxSeq, prevMax);
 	}
 	console.log([maxSeq, subset]);
 }
 
-maxSubarray([-2,-3,-1,-4,-6])
+// maxSubarray([-2,-3,-1,-4,-6])
+
+function lonelyinteger(a) {
+	while (a.length) {
+		const n = a.pop();
+		if (!a.includes(n)) return n;
+		a = a.filter((e) => e !== n);
+	}
+}
+
+function flippingBits(n) {
+	return (2 ** 32) -1 -n;
+}
+
+// console.log(flippingBits(9));
+
+function diagonalDifference(arr) {
+	return Math.abs(arr.reduce((sum, e, idx, arr) => sum + e[idx] - arr[idx][arr.length - 1 - idx]
+		,0))
+
+	// return arr.reduce((sum, e, idx) => Math.abs(arr[idx][idx] - arr[idx][arr.lenght - 1 - idx]),0)
+	// let diag1 = 0;
+	// let diag2 = 0;
+	// for (let i = 0; i < arr.length; i++) {
+	// 		diag1 += arr[i][i];
+	// 		diag2 += arr[i][arr.length - 1 - i];
+	// }
+	// return Math.abs(diag1 - diag2);
+}
+
+// console.log(diagonalDifference([
+// 	[11, 2, 4],
+// 	[4, 5, 6],
+// 	[10, 8, -12],
+// ]));
+
+function countingSort(arr) {
+	const freq = new Array(100).fill(0);
+	arr.forEach((e) => freq[e]++)
+	console.log(freq);
+}
+
+// countingSort([1,1,3,2,1])
+
+function pangrams(s) {
+	// create an array of all letters
+	const alfa = 'abcdefghijklmnopqrstuvwxyz'.split('');
+	// check that each letter is in the string
+	return alfa.every(l => s.toLowerCase().includes(l)) ? 'pangram' : 'not pangram'
+
+}
+
+// pangrams('We promptly judged antique ivory buckles for the next prize');
+// pangrams('We promptly judged antique ivory buckles for the prize');
+
+function twoArrays(k, A, B) {
+	const Bsorted = B.sort((a,b) => a-b);
+	console.log(Bsorted);
+	// loop through all elments in A
+	for (let num of A) {
+		let i = 0;
+		// find the smallest number in B that A + B >= k
+		while(num + Bsorted[i] < k && i < Bsorted.length) {
+			i++;
+		}
+		console.log(num, Bsorted[i], Bsorted.length);
+		if (i >= Bsorted.length) return 'NO'
+		// Remove the B element
+		Bsorted.splice(i,1)
+	}
+	return 'YES'
+}
+
+// console.log(twoArrays(10, [1,2,3], [9,8,7]))
+console.log(twoArrays(94, [84, 2, 50, 51, 19, 58, 12, 90, 81, 68, 54, 73, 81, 31, 79, 85, 39, 2], [53, 102, 40, 17, 33, 92, 18, 79, 66, 23, 84, 25, 38, 43, 27, 55, 8, 19]))

@@ -2,6 +2,9 @@
  Write a function that takes in a string of one or more words, and returns the same string, but with all five or more letter words reversed (Just like the name of this Kata). Strings passed in will consist of only letters and spaces. Spaces will be included only when more than one word is present.
 '''
 
+import enum
+
+
 def wordSpin(sentence):
     spinned = []
     for word in sentence.split():
@@ -103,8 +106,8 @@ def mygcd(x,y):
         x, y = y, x%y
     return x
 
-print(mygcd(30,1))
-print(mygcd(15713250,10063368))
+# print(mygcd(30,1))
+# print(mygcd(15713250,10063368))
 
 # Given a string of words, you need to find the highest scoring word. Each letter of a word scores points according to its position in the alphabet: a = 1, b = 2, c = 3 etc.
 
@@ -125,3 +128,56 @@ def high(x):
 # print(highest('man i need a taxi up to ubud')) # -> 'taxi'
 # print(highest('what time are we climbing up the volcano')) # -> 'volcano'
 # print(highest('take me to semynak')) # -> 'semynak'
+
+def diagonalDifference(arr):
+    for idx, row in enumerate(arr): print(idx, row)
+    diag1 = 0
+    diag2 = 0
+    for i in range(len(arr)):
+        diag1 += arr[i][i]
+        diag2 += arr[i][len(arr)-1-i]
+
+    return abs(diag1-diag2)
+
+# def diagonalDifference(arr):
+#     return abs(sum([row[idx] - row[len(arr)-idx-1] for idx, row in enumerate(arr)]))
+
+# diagonalDifference([[11,2,4],[4,5,6],[10,8,-12]])
+
+def countingSort(arr):
+    freq = [0] * 100
+    for num in arr:
+        freq[num] += 1
+    return freq
+
+
+def pangrams(s):
+	# create an array of all letters
+	alfa = 'abcdefghijklmnopqrstuvwxyz'
+	# check that each letter is in the string
+	return 'pangram' if all(l in s.lower() for l in alfa) else 'not pangram'
+    # print(result)
+
+# print(pangrams('We promptly judged antique ivory buckles for the next prize'))
+# print(pangrams('We promptly judged antique ivory buckles for the prize'))
+
+def twoArrays(k, A, B):
+    A.sort()
+    B.sort(reverse=True)
+    # find the smallest element in B that can meet the condition A + B >= k
+    for i in range(len(A)):
+        if(A[i] + B[i] < k): return 'NO'
+    
+    return 'YES'
+
+def birthday(s, d, m):
+    c = 0
+    # iterate through the s array
+    # check each contigeous array of length m
+    # if the sum is = d, increment counter
+    for i in range(len(s)-m+1):
+        if sum(s[i:i+m]) == d: c += 1
+
+    print(c)
+
+birthday([2,2,1,3,2],4,2)
