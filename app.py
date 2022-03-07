@@ -3,6 +3,9 @@
 '''
 
 import enum
+from multiprocessing.connection import answer_challenge
+from os import wait
+import re
 
 
 def wordSpin(sentence):
@@ -180,4 +183,99 @@ def birthday(s, d, m):
 
     print(c)
 
-birthday([2,2,1,3,2],4,2)
+# birthday([2,2,1,3,2],4,2)
+
+
+def sumXor(n):
+    b = '{0:b}'.format(n)
+    c = sum([1 if x == '0' else 0 for x in b])
+    return 2 ** c if n > 0 else 1
+
+    # return 1 if n == 0 else 2**(bin(n)[2:].count('0'))
+
+# print(sumXor(0))
+
+def counterGame(n):
+    steps = 0
+    x = n
+    while x > 1:
+        print(bin(x)[2:], steps)
+        if bin(x)[2:].count('1') == 1:
+            x = int(x / 2)
+        else:
+            x = x - 2**(len(bin(x)[2:])-1)
+        
+        steps += 1
+    print(x, steps)
+
+    print('Louise' if steps % 2 else 'Richard')
+
+
+
+# counterGame(1560834904)
+
+def towerBreakers(n, m):
+    return 1 if n % 2 else 2
+
+# print(towerBreakers(374625,796723))
+def caesarCipher(s, k):
+
+    new_string = ''
+    for i in range(len(s)):
+        c = s[i]
+        if (c.islower()):
+            os = 97
+        elif (c.isupper()):
+            os = 65
+        else:
+            os = 0
+
+        new_string += chr((ord(c)-os+k)%26+os) if os else c
+
+    return new_string 
+
+# print(caesarCipher('There\'s-a-starman-Waiting', 3))
+
+def superDigit(n, k=1):
+    p = n * k
+    print(p, len(p))
+    if len(p) == 1: return(int(p))
+
+    return superDigit(str(sum([int(d) for d in n])*k))
+
+# print(superDigit('5',4))
+
+def maxMin(k, arr):
+    # sort the array
+    arr.sort()
+    # look for k consecative elements with min diff
+    minmax = min([arr[i+k-1]-arr[i] for i in range(len(arr)-k+1)])
+    return minmax
+
+# print(maxMin(3,[100,200,300,350,400,401,402]))
+
+def dynamicArray(n, queries):
+    # Declare a 2-dimensional array 'arr', of 'n' empty arrays.
+    arr = [[] for i in range(n)]
+    # Declare an integer, , and initialize it to 0
+    lastAnswer = 0
+    answers = []
+
+    for query in queries:
+        print(f'query {query}')
+        idx = (lastAnswer^query[1])%n
+        print(idx)
+        if query[0] == 1:
+            arr[idx].append(query[2])
+            print(arr)
+        else:
+            lastAnswer = arr[idx][query[2]%len(arr[idx])]
+            answers.append(lastAnswer)
+
+    return answers
+
+    
+
+
+
+dynamicArray(4, 3)
