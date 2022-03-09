@@ -312,14 +312,7 @@ def palindromIndex(s):
 
     return -1
 
-# print(palindromIndex('fgnfnidynhxebxxxfmxixhsruldhsaobhlcggchboashdlurshxixmfxxxbexhnydinfngf'))
-
-# def getTotalX(a,b):
-#     common = []
-#     # possible numbers
-#     for n in range(max(a), min(b)+1, max(a)):
-        
-        
+# print(palindromIndex('fgnfnidynhxebxxxfmxixhsruldhsaobhlcggchboashdlurshxixmfxxxbexhnydinfngf'))    
 
 # getTotalX([2,4],[16,32,96])
 def minimumBribes(q):
@@ -335,13 +328,3 @@ def minimumBribes(q):
     print(bribes)
 
 # minimumBribes([1,2,5,3,7,8,6,4])
-
-def processLogs(logs, maxSpan):
-    users = []
-    result = []
-    for log in logs:
-        id, timespan, activity = log.split(' ')
-        
-    
-
-processLogs(["99 1 sign-in","100 10 sign-in","50 20 sign-in","100 15 sign-out","50 26 sign-out","99 2 sign-out"],5)
