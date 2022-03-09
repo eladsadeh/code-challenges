@@ -2,6 +2,7 @@
  Write a function that takes in a string of one or more words, and returns the same string, but with all five or more letter words reversed (Just like the name of this Kata). Strings passed in will consist of only letters and spaces. Spaces will be included only when more than one word is present.
 '''
 
+from dis import dis
 import enum
 from multiprocessing.connection import answer_challenge
 from os import wait
@@ -274,8 +275,73 @@ def dynamicArray(n, queries):
 
     return answers
 
+def gridChallenge(grid):
+    sorted_grid = [sorted(s) for s in grid ]
+    for c in range(len(sorted_grid[0])):
+        for r in range(len(grid)-1):
+            if sorted_grid[r+1][c] < sorted_grid[r][c]: return 'NO'
+    return 'YES'
+
+# print(gridChallenge(['ebacd', 'fghij', 'olmkn', 'trpqs','xywuv']))
+
+def balancedSums(arr):
+    total = sum(arr)
+    suml = 0
+  
+    for el in arr:
+        if suml==total-el-suml: return 'YES'
+        suml += el
+        
+
+    return 'NO'
+
+
+# print(balancedSums([5,6,8,10]))
+
+def palindromIndex(s):
+    print(s)
+    print(s[::-1])
+    # if its a palindrom return -1
+    if s == s[::-1]: return -1
+    for i in range(len(s)):
+        s1 = s[:i] + s[i+1:]
+        if s1 == s1[::-1]:
+            print(s1)
+            print(s1[::-1])
+            return i
+
+    return -1
+
+# print(palindromIndex('fgnfnidynhxebxxxfmxixhsruldhsaobhlcggchboashdlurshxixmfxxxbexhnydinfngf'))
+
+# def getTotalX(a,b):
+#     common = []
+#     # possible numbers
+#     for n in range(max(a), min(b)+1, max(a)):
+        
+        
+
+# getTotalX([2,4],[16,32,96])
+def minimumBribes(q):
+    bribes = 0
+    for i in range(len(q)):
+        displacement = q[i] - i - 1
+        if displacement > 2:
+            print("Too chaotic")
+            return
+        else:
+            bribes += displacement if displacement > 0 else 0
+    
+    print(bribes)
+
+# minimumBribes([1,2,5,3,7,8,6,4])
+
+def processLogs(logs, maxSpan):
+    users = []
+    result = []
+    for log in logs:
+        id, timespan, activity = log.split(' ')
+        
     
 
-
-
-dynamicArray(4, 3)
+processLogs(["99 1 sign-in","100 10 sign-in","50 20 sign-in","100 15 sign-out","50 26 sign-out","99 2 sign-out"],5)

@@ -454,14 +454,18 @@ function lonelyinteger(a) {
 }
 
 function flippingBits(n) {
-	return (2 ** 32) -1 -n;
+	return 2 ** 32 - 1 - n;
 }
 
 // console.log(flippingBits(9));
 
 function diagonalDifference(arr) {
-	return Math.abs(arr.reduce((sum, e, idx, arr) => sum + e[idx] - arr[idx][arr.length - 1 - idx]
-		,0))
+	return Math.abs(
+		arr.reduce(
+			(sum, e, idx, arr) => sum + e[idx] - arr[idx][arr.length - 1 - idx],
+			0
+		)
+	);
 
 	// return arr.reduce((sum, e, idx) => Math.abs(arr[idx][idx] - arr[idx][arr.lenght - 1 - idx]),0)
 	// let diag1 = 0;
@@ -481,7 +485,7 @@ function diagonalDifference(arr) {
 
 function countingSort(arr) {
 	const freq = new Array(100).fill(0);
-	arr.forEach((e) => freq[e]++)
+	arr.forEach((e) => freq[e]++);
 	console.log(freq);
 }
 
@@ -491,31 +495,141 @@ function pangrams(s) {
 	// create an array of all letters
 	const alfa = 'abcdefghijklmnopqrstuvwxyz'.split('');
 	// check that each letter is in the string
-	return alfa.every(l => s.toLowerCase().includes(l)) ? 'pangram' : 'not pangram'
-
+	return alfa.every((l) => s.toLowerCase().includes(l))
+		? 'pangram'
+		: 'not pangram';
 }
 
 // pangrams('We promptly judged antique ivory buckles for the next prize');
 // pangrams('We promptly judged antique ivory buckles for the prize');
 
 function twoArrays(k, A, B) {
-	const Bsorted = B.sort((a,b) => a-b);
+	const Bsorted = B.sort((a, b) => a - b);
 	console.log(Bsorted);
 	// loop through all elments in A
 	for (let num of A) {
 		let i = 0;
 		// find the smallest number in B that A + B >= k
-		while(num + Bsorted[i] < k && i < Bsorted.length) {
+		while (num + Bsorted[i] < k && i < Bsorted.length) {
 			i++;
 		}
 		console.log(num, Bsorted[i], Bsorted.length);
-		if (i >= Bsorted.length) return 'NO'
+		if (i >= Bsorted.length) return 'NO';
 		// Remove the B element
-		Bsorted.splice(i,1)
+		Bsorted.splice(i, 1);
 	}
-	return 'YES'
+	return 'YES';
 }
 
 // console.log(twoArrays(10, [1,2,3], [9,8,7]))
 // console.log(twoArrays(94, [84, 2, 50, 51, 19, 58, 12, 90, 81, 68, 54, 73, 81, 31, 79, 85, 39, 2], [53, 102, 40, 17, 33, 92, 18, 79, 66, 23, 84, 25, 38, 43, 27, 55, 8, 19]))
 
+function gridChallenge(grid) {
+	// create a sorted grid
+	const sorted = grid.map((row) => row.split('').sort());
+	// check that columns are sorted too
+	for (let c = 0; c < grid.length; c++) {
+		for (let r = 0; r < grid.length - 1; r++) {
+			if (sorted[r + 1][c] < sorted[r][c]) {
+				return 'NO';
+			}
+		}
+	}
+	return 'YES';
+}
+
+// console.log(gridChallenge(['xywuv','ebacd', 'fghij', 'olmkn', 'trpqs']));
+
+function processLogs(logs, maxSpan) {
+	let users = {};
+	let result = [];
+	// prepare object with in/out for each user
+	logs.forEach((log) => {
+		let [id, time, activity] = log.replace('-', '').split(' ');
+		users[id] = { ...users[id], [activity]: time };
+	});
+	Object.keys(users).forEach((user) => {
+		if (users[user].signout - users[user].signin <= maxSpan) {
+			result.push(user);
+		}
+	});
+	console.log(result.sort((a, b) => a - b));
+}
+
+// processLogs(
+// 	[
+// 		'99 2 sign-out',
+// 		'100 10 sign-in',
+// 		'50 20 sign-in',
+// 		'100 15 sign-out',
+// 		'50 26 sign-out',
+// 		'99 1 sign-in',
+// 	],
+// 	5
+// );
+
+function find_meeting_slots(num_slots, employee_schedules) {
+	let slots = [];
+	// initialize calendar array consist of a slot for every 15 minutes
+	// time is converted into an index in the calendar array
+	let calendar = new Array(96).fill(employee_schedules.length);
+	function timeToIndex(time) {
+		const [hour, minutes] = time.split(':');
+		return Number(hour) * 4 + Number(minutes) / 15;
+	}
+	function indexToTime(index) {
+		const hour = Math.floor(index / 4);
+		const minutes = (index % 4) * 15;
+		return `${hour}`.padStart(2, '0') + ':' + `${minutes}`.padStart(2, '0');
+	}
+	// process employee shedule and reduce the number of available employees
+	employee_schedules.forEach((employee) => {
+		employee.forEach((schedule) => {
+			console.log(schedule);
+			const [start, end] = schedule.split('-').map((time) => timeToIndex(time));
+			// if the employee is not available reduce the availabilty
+			for (let i = start; i <= end; i++) {
+				calendar[i]--;
+			}
+		});
+	});
+	// process that calendar to find slots with 2 or more participants
+	let start = '';
+	for (let i = 0; i < calendar.length; i++) {
+		if (!start && calendar[i] > 1) {
+			// No start time and more than 2 available
+			start = indexToTime(Math.max(i - 1, 0));
+		} else if (start && calendar[i] !== calendar[i - 1]) {
+			// start time and different number available
+			if (calendar[i] > 1) {
+				// end of slot, start a new slot
+				slots.push({
+					slot: `${start}-${indexToTime(i)}`,
+					participants: calendar[i - 1],
+				});
+				start = indexToTime(Math.max(i, 0));
+			} else {
+				// end of slot
+				slots.push({
+					slot: `${start}-${indexToTime(i)}`,
+					participants: calendar[i - 1],
+				});
+				start = '';
+			}
+		} else if (start && i === calendar.length - 1) {
+			slots.push({ slot: `${start}-24:00`, participants: calendar[i - 1] });
+		}
+	}
+	slots.sort((a,b) => b.participants - a.participants)
+	console.log('slots:', slots.slice(0, num_slots-1));
+	let res = slots.map((s) => s.slot);
+	console.log(res.slice(0, num_slots - 1));
+
+	// console.log(num_slots, employee_schedules);
+}
+
+find_meeting_slots(3, [
+	['08:00-12:30', '17:00-22:00'],
+	['07:00-14:30', '16:00-19:00'],
+	['08:00-14:30', '17:00-19:00'],
+]);
