@@ -314,7 +314,6 @@ def palindromIndex(s):
 
 # print(palindromIndex('fgnfnidynhxebxxxfmxixhsruldhsaobhlcggchboashdlurshxixmfxxxbexhnydinfngf'))    
 
-# getTotalX([2,4],[16,32,96])
 def minimumBribes(q):
     bribes = 0
     for i in range(len(q)):

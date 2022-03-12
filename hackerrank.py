@@ -49,4 +49,32 @@ def palindromIndex(s):
 
     return idx
 
-print(palindromIndex('baa'))
+# print(palindromIndex('baa'))
+
+def getTotalX(A, B):
+     # numbers must be between the max of array A and the min of array B (inclusive)
+    a = max(A)
+    b = min(B)+1
+    if b<a:
+        return 0
+    counter = 0
+    # numbers must be multiples of a
+    for n in range(a, b, a):
+        if all(n%x == 0 for x in A) and all(x%n == 0 for x in B):
+            counter += 1
+
+    return counter
+
+# getTotalX([2,4],[16,32,96])
+
+# find minimum number of string to change to make to halfs of string anagram (contain the same letters)
+def anagram(s):
+    # Write your code here
+    if len(s)%2 == 1: 
+        return -1
+    
+    left = s[:int(len(s)/2)]
+    right = s[int(len(s)/2):]
+    print(left, right)
+
+print(anagram('xaxbbbxx'))
