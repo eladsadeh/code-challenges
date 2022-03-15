@@ -19,7 +19,6 @@ def palindromIndex(s):
                 i += 1
                 j -= 2
             else:
-                # the right side can't be palindrom
                 # try the left side
                 break
         else:
@@ -30,7 +29,7 @@ def palindromIndex(s):
     if (found is True and i >= j):
         print(f'right: {i}')
         return idx
-    # Try the other side
+    # Else, try the other side
     found = False
 
     b = len(s)-a-1
@@ -50,52 +49,37 @@ def palindromIndex(s):
 
     return idx
 
-print(palindromIndex('baa'))
-'''
-found = False
-    # if its a palindrom return -1
-    if s == s[::-1]: 
-        return -1
-    # check the left side
-    i = 0
-    j = len(s)-1
-    while(i < j):
-        if s[i] == s[j]:
-            i += 1
-            j -= 1
-        elif found is True:
-            # if idx already found its more than one character
-            break
-        elif s[i] == s[j-1]:
-            found = True
-            idx = j
-            i += 1
-            j -= 2
-        else:
-            # more than one characters are not the same
-            break
-    # if the foreign character was found and the whole string was checked return the index
-    if (found is True and i >= j): 
-        return idx
-        
-    # Try the other side
-    found = False
-    i = 0
-    j = len(s)-1
-    while(i < j):
-        if s[i] == s[j]:
-            i += 1
-            j -= 1
-        elif found is True:
-            # if idx already found its more than one character
-            return -1
-        elif s[i+1] == s[j]:
-            idx = i
-            i += 2
-            j -= 1
-        else:
-            return -1
-    return idx
-'''
+# print(palindromIndex('baa'))
 
-const numbers 
+def getTotalX(A, B):
+     # numbers must be between the max of array A and the min of array B (inclusive)
+    a = max(A)
+    b = min(B)+1
+    if b<a:
+        return 0
+    counter = 0
+    # numbers must be multiples of a
+    for n in range(a, b, a):
+        if all(n%x == 0 for x in A) and all(x%n == 0 for x in B):
+            counter += 1
+
+    return counter
+
+# getTotalX([2,4],[16,32,96])
+
+# find minimum number of string to change to make to halfs of string anagram (contain the same letters)
+def anagram(s):
+    # if s is odd number of letters
+    if len(s)%2 == 1: 
+        return -1
+    
+    left = s[:len(s)//2]
+    right = s[len(s)//2:]
+    # for every letter in left,
+    for l in left:
+    # if letter found in right, remove from right
+        right = right.replace(l,'',1)
+    # return the length of right
+    return len(right)
+
+print(anagram('xaxbbbxx'))

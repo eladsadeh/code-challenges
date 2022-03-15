@@ -531,3 +531,13 @@ function gridChallenge(grid) {
 }
 
 // console.log(gridChallenge(['xywuv','ebacd', 'fghij', 'olmkn', 'trpqs']));
+
+function URLparser(site) {
+	console.log(site);
+	const regex = /(\S*)/;
+	const urlString = site.match(/(https*:\/\/)*(www\.)*(\S*)\/*/);
+	console.log(urlString);
+	return site;
+}
+
+URLparser('satambus.it');
