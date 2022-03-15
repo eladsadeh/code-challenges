@@ -69,12 +69,17 @@ def getTotalX(A, B):
 
 # find minimum number of string to change to make to halfs of string anagram (contain the same letters)
 def anagram(s):
-    # Write your code here
+    # if s is odd number of letters
     if len(s)%2 == 1: 
         return -1
     
-    left = s[:int(len(s)/2)]
-    right = s[int(len(s)/2):]
-    print(left, right)
+    left = s[:len(s)//2]
+    right = s[len(s)//2:]
+    # for every letter in left,
+    for l in left:
+    # if letter found in right, remove from right
+        right = right.replace(l,'',1)
+    # return the length of right
+    return len(right)
 
 print(anagram('xaxbbbxx'))
