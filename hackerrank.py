@@ -82,4 +82,23 @@ def anagram(s):
     # return the length of right
     return len(right)
 
-print(anagram('xaxbbbxx'))
+# print(anagram('xaxbbbxx'))
+
+def minimumBribes(q):
+    bribes = 0
+    for i in range(len(q)-1,0,-1):
+        if i+1 != q[i]:
+            j = 1
+            while(i+1 != q[i-j]):
+                if j > 1: 
+                    return print('Too chaotic')
+                j += 1
+            bribes += j
+            q.pop(i-j)
+        else:
+             q.pop()
+               
+    print(bribes)
+
+# minimumBribes([2,1,5,3,4])
+minimumBribes([2,5,1,3,4])
