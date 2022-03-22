@@ -133,4 +133,14 @@ def climbingLeaderboard(ranked, player):
 
     print(res)
 
-climbingLeaderboard([100,100,50,40,40,20,10], [5,25,50,110,120])
+# climbingLeaderboard([100,100,50,40,40,20,10], [5,25,50,110,120])
+
+def reverse(llist):
+	w = llist
+	r = None
+	while (w):
+		w.prev = w.next
+		w.next = r
+		r = w
+		w = w.prev
+	return r

@@ -63,3 +63,16 @@ function reverse(llist) {
 	}
 	return r;
 }
+
+// Reverse double linked list
+function reverseDouble(llist) {
+	let w = llist; // Current
+	let r = null; // Reversed
+	while (w) {
+		w.prev = w.next;
+		w.next = r;
+		r = w;
+		w = w.prev;
+	}
+	return r;
+}
