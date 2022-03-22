@@ -101,4 +101,36 @@ def minimumBribes(q):
     print(bribes)
 
 # minimumBribes([2,1,5,3,4])
-minimumBribes([2,5,1,3,4])
+# minimumBribes([2,5,1,3,4])
+
+def isValid(s):
+    f = []
+    while len(s) > 0:
+        f.append(s.count(s[0]))
+        s = s.replace(s[0],'')
+
+    mini = min(f)
+    maxi = max(f)
+
+    print(f, min(f), f.count(maxi))
+    if max(f) == min(f) or (f.count(mini) == len(f)-1 and maxi-mini == 1) or (f.count(maxi) == len(f)-1 and mini == 1):
+        return 'YES'
+
+    return 'NO'
+
+# print(isValid('abcdefghhgfedecba'))
+
+def climbingLeaderboard(ranked, player):
+    res = []
+    # create a uniqu ranked array
+    uniq = list(dict.fromkeys(ranked).keys())
+
+    r = len(uniq)-1
+    for score in player:
+        while r >= 0 and score >= uniq[r]:
+            r -= 1
+        res.append(r+2)
+
+    print(res)
+
+climbingLeaderboard([100,100,50,40,40,20,10], [5,25,50,110,120])
