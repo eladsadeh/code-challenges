@@ -49,3 +49,17 @@ console.log(
 		'OO.....',
 	])
 );
+
+// Reverse linked list
+function reverse(llist) {
+	let w = llist; // Current
+	let r = null; // Reversed
+	let t = null; // Temporaray element
+	while (w) {
+		t = w.next;
+		w.next = r;
+		r = w;
+		w = t;
+	}
+	return r;
+}
