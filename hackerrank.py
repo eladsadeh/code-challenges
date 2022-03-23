@@ -144,3 +144,15 @@ def reverse(llist):
 		r = w
 		w = w.prev
 	return r
+
+def insertNodeAtPosition(llist, data, position):
+    new_node = SinglyLinkedListNode(data)
+    w = llist
+    i = 1
+    while(w and i < position):
+        w = w.next
+        i += 1
+    
+    new_node.next = w.next
+    w.next = new_node
+    return llist
