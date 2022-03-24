@@ -540,4 +540,36 @@ function URLparser(site) {
 	return site;
 }
 
-URLparser('satambus.it');
+// URLparser('satambus.it');
+
+var valid_countries = ['US', 'IT'];
+
+function extractPrice(description, country) {
+	if (!valid_countries.includes(country)) {
+		return -1;
+	}
+
+	if (country == 'US') {
+		var price = description.match(/\$(\d+\.\d+)/)[1];
+
+		if (price == null) {
+			return -1;
+		}
+
+		return parseFloat(price);
+	}
+
+	if (country == 'IT') {
+		var price = description.match(/(\€*(\d+)[\.\€](\d+)\€*)/);
+		if (price == null || !price[0].includes('€')) {
+			return -1;
+		}
+
+		return parseFloat(`${price[2]}.${price[3]}`);
+	}
+}
+
+// console.log(extractPrice('€19.99', 'IT'));
+// console.log(extractPrice('19.99', 'US'));
+// console.log(extractPrice('19.99€', 'IT'));
+// console.log(extractPrice('19€99', 'IT'));

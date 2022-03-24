@@ -133,4 +133,37 @@ def climbingLeaderboard(ranked, player):
 
     print(res)
 
-climbingLeaderboard([100,100,50,40,40,20,10], [5,25,50,110,120])
+# climbingLeaderboard([100,100,50,40,40,20,10], [5,25,50,110,120])
+
+def reverse(llist):
+	w = llist
+	r = None
+	while (w):
+		w.prev = w.next
+		w.next = r
+		r = w
+		w = w.prev
+	return r
+
+def insertNodeAtPosition(llist, data, position):
+    new_node = SinglyLinkedListNode(data)
+    w = llist
+    i = 1
+    while(w and i < position):
+        w = w.next
+        i += 1
+    
+    new_node.next = w.next
+    w.next = new_node
+    return llist
+
+def mergeLists(head1, head2):
+    if(head1 == None): return head2
+    if(head2 == None): return head1
+
+    w1 = head1
+    w2 = head2
+
+    while w1 or w2:
+        if w1 == None:
+            
