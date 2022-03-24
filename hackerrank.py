@@ -156,3 +156,14 @@ def insertNodeAtPosition(llist, data, position):
     new_node.next = w.next
     w.next = new_node
     return llist
+
+def mergeLists(head1, head2):
+    if(head1 == None): return head2
+    if(head2 == None): return head1
+
+    w1 = head1
+    w2 = head2
+
+    while w1 or w2:
+        if w1 == None:
+            
