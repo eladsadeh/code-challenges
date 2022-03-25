@@ -466,7 +466,6 @@ function diagonalDifference(arr) {
 			0
 		)
 	);
-
 }
 
 // console.log(diagonalDifference([
@@ -573,3 +572,57 @@ function extractPrice(description, country) {
 // console.log(extractPrice('19.99', 'US'));
 // console.log(extractPrice('19.99€', 'IT'));
 // console.log(extractPrice('19€99', 'IT'));
+
+function solution(A) {
+	for (let i = 1; i <= Math.max(A); i++) {
+		if (!A.includes(i)) return i;
+	}
+	return i + 1;
+}
+
+function minimumStrings(S) {
+	const blocks = S.match(/a+/g).concat(S.match(/b+/g));
+	const mx = blocks.reduce((a, e) => (e.length > a ? e.length : a), 0);
+	return blocks.reduce((t, e) => (t += mx - e.length), 0);
+	console.log(blocks, mx, total);
+}
+
+// minimumStrings('aababbaaa')
+
+// Exercize to print content of table cells if the background
+// and text color are not the same (Codility for Grant street group)
+function printTable() {
+	const table = document.querySelector('table');
+	const rows = table.rows;
+	let text = '';
+	Array.from(rows).forEach((row) => {
+		const cols = row.getElementsByTagName('td');
+		console.log(cols);
+		Array.from(cols).forEach((col) => {
+			if (col.style.color !== col.style.backgroundColor) {
+				text += col.textContent;
+			}
+		});
+	});
+	return text;
+}
+
+function binaryGap(N) {
+	const binary = N.toString(2).split('');
+	let currentGap = 0;
+	let biggestGap = 0;
+	let count = false;
+	for (i=0; i < binary.length; i++) {
+		if (!count && binary[i] === '1') count = true;
+		else if (count && binary[i] === '0') currentGap++;
+		else if (currentGap && binary[i] === '1') {
+			// count = false;
+			biggestGap = currentGap > biggestGap ? currentGap : biggestGap;
+			currentGap = 0;
+		}
+		// console.log(binary[i],count, currentGap, biggestGap);
+	}
+	return biggestGap;
+}
+
+binaryGap(328);

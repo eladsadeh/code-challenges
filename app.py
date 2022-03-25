@@ -327,3 +327,11 @@ def minimumBribes(q):
     print(bribes)
 
 # minimumBribes([1,2,5,3,7,8,6,4])
+
+def maximumGap(N):
+    binary = bin(N)[2:]
+    return max([len(x) for x in binary.strip('0').strip('1').split('1') ])
+  
+
+maximumGap(328)
+    
