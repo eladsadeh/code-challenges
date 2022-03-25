@@ -606,3 +606,23 @@ function printTable() {
 	});
 	return text;
 }
+
+function binaryGap(N) {
+	const binary = N.toString(2).split('');
+	let currentGap = 0;
+	let biggestGap = 0;
+	let count = false;
+	for (i=0; i < binary.length; i++) {
+		if (!count && binary[i] === '1') count = true;
+		else if (count && binary[i] === '0') currentGap++;
+		else if (currentGap && binary[i] === '1') {
+			// count = false;
+			biggestGap = currentGap > biggestGap ? currentGap : biggestGap;
+			currentGap = 0;
+		}
+		// console.log(binary[i],count, currentGap, biggestGap);
+	}
+	return biggestGap;
+}
+
+binaryGap(328);
