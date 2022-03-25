@@ -343,10 +343,6 @@ def twoSum(nums, target):
             return [map[key], i]
         else:
             map[n] = i
-            
-          
-            
-
 
 twoSum([3,2,4],6)
     
