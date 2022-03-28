@@ -161,9 +161,39 @@ def mergeLists(head1, head2):
     if(head1 == None): return head2
     if(head2 == None): return head1
 
-    w1 = head1
-    w2 = head2
+    if head1.data <= head2.data:
+        head = head1
+        w1 = head1.next
+        w2 = head2
+    else:
+        head = head2
+        w1 = head1
+        w2 = head2.next
+    w = head
+    while w1 and w2:
+        if w1.data <= w2.data:
+            w.next = w1
+            w1 = w1.next
+        else:
+            w.next = w2
+            w2 = w2.next
+        w = w.next
 
-    while w1 or w2:
-        if w1 == None:
-            
+    w.next = w1 if w2 == None else w2
+
+    return head
+
+# Two sum function
+def icecreamParlor(m, arr):
+    # Object to store previous possible options
+    used = {}
+    # For each index/cost
+    for i,cost in enumerate(arr):
+        # Key + cost = m (total)
+        key = m - cost
+        # If key in 'storage' than key + cost is what we are looking for, return the indexes
+        if key in used:
+            return [used[key], i+1]
+        # Otherwise, store for the next options
+        else:
+            used[cost] = i+1
