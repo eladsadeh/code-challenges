@@ -76,3 +76,30 @@ function reverseDouble(llist) {
 	}
 	return r;
 }
+
+// Queue implementation and processing of queries
+function processData(input) {
+	class Queue {
+		constructor() {
+			this.items = [];
+		}
+		enqueue(item) {
+			this.items.push(item);
+		}
+		dequeue() {
+			return this.items.length ? this.items.shift() : null;
+		}
+		peek() {
+			return this.items.length ? this.items[0] : null;
+		}
+	}
+
+	const queue = new Queue();
+	const queries = input.split('\n');
+	for (let i = 1; i <= Number(queries[0]); i++) {
+		const query = queries[i].split(' ');
+		if (query[0] === '1') queue.enqueue(Number(query[1]));
+		else if (query[0] === '2') queue.dequeue();
+		else console.log(queue.peek());
+	}
+} 
