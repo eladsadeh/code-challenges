@@ -197,3 +197,48 @@ def icecreamParlor(m, arr):
         # Otherwise, store for the next options
         else:
             used[cost] = i+1
+
+# Queue with two stacks
+class Queue:
+    def __init__(self):
+        self.en = []
+        self.dq = []
+ 
+    # EnQueue item to the queue
+    def enQueue(self, x):
+        self.en.append(x)
+ 
+    # DeQueue item from the queue
+    def deQueue(self):
+
+        # if both the stacks are empty
+        if len(self.en) == 0 and len(self.dq) == 0:
+            return None
+
+        # if dq is empty and en has elements
+        # move all items to dq stack
+        elif len(self.dq) == 0 and len(self.en) > 0:
+            while len(self.en):
+                self.dq.append(self.en.pop())
+        # dequeue from dq stack
+        return self.dq.pop()
+    
+    def peek(self):
+        # if both the stacks are empty
+        if len(self.en) == 0 and len(self.dq) == 0:
+            return None
+
+        # if dq is empty print the first item in en, 
+        # else print the last itme in dq
+        print(self.en[0]) if len(self.dq) == 0 else print(self.dq[len(self.dq)-1])
+    
+queue = Queue()
+for _ in range(int(input())):
+    l = input()
+    if l == '3':
+        queue.peek()
+    elif l == '2':
+        queue.deQueue()
+    else:
+        [q, x] = l.split(' ')
+        queue.enQueue(x)
