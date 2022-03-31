@@ -39,16 +39,16 @@ function bomberMan(n, grid) {
 	}
 }
 
-console.log(
-	bomberMan(3, [
-		'.......',
-		'...O...',
-		'....O..',
-		'.......',
-		'OO.....',
-		'OO.....',
-	])
-);
+// console.log(
+// 	bomberMan(3, [
+// 		'.......',
+// 		'...O...',
+// 		'....O..',
+// 		'.......',
+// 		'OO.....',
+// 		'OO.....',
+// 	])
+// );
 
 // Reverse linked list
 function reverse(llist) {
