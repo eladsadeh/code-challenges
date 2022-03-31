@@ -231,14 +231,28 @@ class Queue:
         # if dq is empty print the first item in en, 
         # else print the last itme in dq
         print(self.en[0]) if len(self.dq) == 0 else print(self.dq[len(self.dq)-1])
-    
-queue = Queue()
-for _ in range(int(input())):
-    l = input()
-    if l == '3':
-        queue.peek()
-    elif l == '2':
-        queue.deQueue()
-    else:
-        [q, x] = l.split(' ')
+
+def two_stack_queue(): 
+    queue = Queue()
+    for _ in range(int(input())):
+        l = input()
+        if l == '3':
+            queue.peek()
+        elif l == '2':
+            queue.deQueue()
+        else:
+            [q, x] = l.split(' ')
         queue.enQueue(x)
+
+import re
+
+def isBalanced(s):
+    while '()' in s or '[]' in s or '{}' in s:
+        s = s.replace('()', '').replace('[]', '').replace('{}', '')
+    
+    if len(s) > 0:
+        return 'NO'
+    else:
+        return 'YES'
+
+# print(isBalanced('{{()[]}}}'))
