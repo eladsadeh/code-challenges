@@ -344,5 +344,5 @@ def twoSum(nums, target):
         else:
             map[n] = i
 
-twoSum([3,2,4],6)
+# twoSum([3,2,4],6)
     

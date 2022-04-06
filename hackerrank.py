@@ -96,7 +96,7 @@ def minimumBribes(q):
             bribes += j
             q.pop(i-j)
         else:
-             q.pop()
+            q.pop()
                
     print(bribes)
 
@@ -136,26 +136,15 @@ def climbingLeaderboard(ranked, player):
 # climbingLeaderboard([100,100,50,40,40,20,10], [5,25,50,110,120])
 
 def reverse(llist):
-	w = llist
-	r = None
-	while (w):
-		w.prev = w.next
-		w.next = r
-		r = w
-		w = w.prev
-	return r
-
-def insertNodeAtPosition(llist, data, position):
-    new_node = SinglyLinkedListNode(data)
     w = llist
-    i = 1
-    while(w and i < position):
-        w = w.next
-        i += 1
-    
-    new_node.next = w.next
-    w.next = new_node
-    return llist
+    r = None
+    while (w):
+        w.prev = w.next
+        w.next = r
+        r = w
+        w = w.prev
+    return r
+
 
 def mergeLists(head1, head2):
     if(head1 == None): return head2
@@ -256,3 +245,87 @@ def isBalanced(s):
         return 'YES'
 
 # print(isBalanced('{{()[]}}}'))
+
+# return q first prime numbers
+def get_primes(q):
+    p = [2]
+    n = 3
+    while len(p) < q:
+        i = 0
+        is_prime = True
+        while is_prime and i < len(p) and p[i] <= n / 2:
+            if n%p[i] == 0: is_prime = False
+            i += 1
+        if is_prime: p.append(n)
+        n += 1
+
+    return p
+
+def waiter(number, q):
+    primes = get_primes(q)
+    answers = []
+    for p in primes:
+        A = []; B = []
+        for N in reversed(number):
+            if N%p == 0:
+                B.append(N)
+            else:
+                A.append(N)
+        number = A[:]
+        answers += reversed(B)
+        print(A, B, answers)
+    answers += reversed(A)
+    return answers
+
+# print(waiter([2,3,5,6,7],3))
+
+# Simple text editor challange in Hacker Rank
+def simple_text_editor():
+    s = ''
+    h = []
+    for _ in range(int(input())):
+        op = input().split()
+        if op[0] == '1':
+            h.append(s)
+            s += op[1]
+        elif op[0] == '2':
+            h.append(s)
+            s = s[:-int(op[1])]
+        elif op[0] == '3':
+            print(s[int(op[1])-1])
+        else:
+            s = h.pop()
+
+# Hacker Rank Truck Tour challenge
+def truckTour(p):
+    # Write your code here
+    print(p)
+    start = 0
+    fuel = 0
+    diff=0
+    for i,pump in enumerate(p):
+        fuel = fuel+pump[0]-pump[1]
+        if fuel < 0:
+            start = i+1
+            diff = diff+fuel
+            fuel=0
+        print(pump, fuel, start)
+        
+    return start if fuel+diff >= 0 else -1
+
+# Hacker Rank Pairs challenge
+def pairs(k, arr):
+    # count = 0
+    # for i in range(len(arr)-1):
+    #     for j in range(i+1,len(arr)):
+    #         if abs(arr[i]-arr[j]) == k: count +=1
+    # for n in arr:
+    #     if n+k in arr:
+    #         count += 1
+    # return count
+    return len(set(arr) & set([item + k for item in set(arr)]))
+
+def bigSorting(unsorted):
+    unsorted.sort(key=int)
+    return unsorted
+    return sorted(unsorted, key=int)
