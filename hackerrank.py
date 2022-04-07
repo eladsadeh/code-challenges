@@ -329,3 +329,28 @@ def bigSorting(unsorted):
     unsorted.sort(key=int)
     return unsorted
     return sorted(unsorted, key=int)
+
+# solution from https://github.com/ssmehta/programming-challanges/blob/master/hackerrank/algorithms/lego-blocks/lego-blocks.py
+
+def legoBlocks(n, m):
+    MOD = 1000000007
+    # print(n, m)
+    # The number of combinations to build a single row
+    # for m = 0 - 3
+    row_combinations = [1, 1, 2, 4]
+    # Build row combinations up to this wall's width
+    # For m > 3, the total combinations is the sum of the
+    # last 4 widths
+    while len(row_combinations) <= m:
+        row_combinations.append(sum(row_combinations[-4:]) % MOD)
+    # total combinations for constructing a wall of height N of varying widths
+    total = [pow(c, n, MOD) for c in row_combinations]
+    
+    # number of unstable wall configurations for a wall of height N of varying widths
+    unstable = [0, 0]
+        
+    for i in range(2, m + 1):
+        unstable.append(sum((total[j] - unstable[j]) * total[i - j] for j in range(1, i)) % MOD)
+        
+    # Print the number of stable wall combinations
+    return ((total[m] - unstable[m]) % MOD)
