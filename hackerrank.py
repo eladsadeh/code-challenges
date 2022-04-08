@@ -341,16 +341,28 @@ def legoBlocks(n, m):
     # Build row combinations up to this wall's width
     # For m > 3, the total combinations is the sum of the
     # last 4 widths
+    # total combinations are:
+    # combination for m - 1 by adding block width 1
+    # combination for m - 2 by adding block width 2
+    # combination for m - 3 by adding block width 3
+    # combination for m - 4 by adding block width 4
+    #
     while len(row_combinations) <= m:
         row_combinations.append(sum(row_combinations[-4:]) % MOD)
     # total combinations for constructing a wall of height N of varying widths
     total = [pow(c, n, MOD) for c in row_combinations]
-    
+    print(row_combinations)
+    print(total)
+   
     # number of unstable wall configurations for a wall of height N of varying widths
     unstable = [0, 0]
-        
+       
     for i in range(2, m + 1):
         unstable.append(sum((total[j] - unstable[j]) * total[i - j] for j in range(1, i)) % MOD)
-        
+    
+    print(unstable)
     # Print the number of stable wall combinations
+    print((total[m] - unstable[m]) % MOD)
     return ((total[m] - unstable[m]) % MOD)
+
+legoBlocks(2,3)
