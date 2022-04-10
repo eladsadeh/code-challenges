@@ -334,35 +334,36 @@ def bigSorting(unsorted):
 
 def legoBlocks(n, m):
     MOD = 1000000007
-    # print(n, m)
     # The number of combinations to build a single row
-    # for m = 0 - 3
-    row_combinations = [1, 1, 2, 4]
-    # Build row combinations up to this wall's width
+    # for m = 0 to 3
+    combinations = [1, 1, 2, 4]
+    # Each row is independent so the total combinations is
+    # the number of combinations for one row power 'n'
+    total = [1,1, 2**n, 4**n]
     # For m > 3, the total combinations is the sum of the
-    # last 4 widths
-    # total combinations are:
-    # combination for m - 1 by adding block width 1
-    # combination for m - 2 by adding block width 2
-    # combination for m - 3 by adding block width 3
-    # combination for m - 4 by adding block width 4
-    #
-    while len(row_combinations) <= m:
-        row_combinations.append(sum(row_combinations[-4:]) % MOD)
-    # total combinations for constructing a wall of height N of varying widths
-    total = [pow(c, n, MOD) for c in row_combinations]
-    print(row_combinations)
-    print(total)
-   
-    # number of unstable wall configurations for a wall of height N of varying widths
-    unstable = [0, 0]
-       
-    for i in range(2, m + 1):
-        unstable.append(sum((total[j] - unstable[j]) * total[i - j] for j in range(1, i)) % MOD)
+    # combinations for the last 4 widths:
+    # Total combination for m - 1 by adding block width 1
+    # Total combination for m - 2 by adding block width 2
+    # Total combination for m - 3 by adding block width 3
+    # Total combination for m - 4 by adding block width 4
+    while len(combinations) <= m:
+        c = sum(combinations[-4:]) % MOD
+        combinations.append(c) # possible combinations for one row
+        total.append(pow(c,n,MOD)) # possible combinations for 'n' rows
     
-    print(unstable)
-    # Print the number of stable wall combinations
-    print((total[m] - unstable[m]) % MOD)
-    return ((total[m] - unstable[m]) % MOD)
+    # To find the number of unstable combinations in a wall size i,
+    # we progressively split the wall into two parts, j and (i-j).
+    # (the wall is unstable if it can be divided to two or more parts)
+    # The total unstable combinations for wall size i is the sum of all
+    # the stable combinations for size j, multiply by the total combinations
+    # (stable and unstable) for size i-j for each j=1 to i-1.
+    # For i=1, the stable combination = 1.
+    stable =[0,1]
+    for i in range(2, m+1):
+        # unstable[i] = sum((stable[j]*total[i-j]) for j in range(1,i))
+        # stable[i] = total[i] - unstable[i]
+        stable.append(total[i] - sum((stable[j]*total[i-j]) for j in range(1,i)) % MOD)
+        
+    return stable[m] % MOD
 
 legoBlocks(2,3)
