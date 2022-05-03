@@ -233,8 +233,6 @@ def two_stack_queue():
             [q, x] = l.split(' ')
         queue.enQueue(x)
 
-import re
-
 def isBalanced(s):
     while '()' in s or '[]' in s or '{}' in s:
         s = s.replace('()', '').replace('[]', '').replace('{}', '')

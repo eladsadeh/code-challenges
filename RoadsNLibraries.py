@@ -8,7 +8,7 @@
 # cheaper to build a library in each city.
 
 def roadsAndLibraries(n, c_lib, c_road, cities):
-    if c_lib < c_road: return c_lib * n
+    if c_lib <= c_road: return c_lib * n
 
     # find all cities that are in the same cluster
     # the given city. This function traverse through
