@@ -612,7 +612,7 @@ function binaryGap(N) {
 	let currentGap = 0;
 	let biggestGap = 0;
 	let count = false;
-	for (i=0; i < binary.length; i++) {
+	for (i = 0; i < binary.length; i++) {
 		if (!count && binary[i] === '1') count = true;
 		else if (count && binary[i] === '0') currentGap++;
 		else if (currentGap && binary[i] === '1') {
@@ -625,4 +625,67 @@ function binaryGap(N) {
 	return biggestGap;
 }
 
-binaryGap(328);
+// binaryGap(328);
+
+function compareDates(obj) {
+	console.log(obj.d1, obj.d2);
+	console.log(obj.d1 < obj.d2 ? 'd1' : 'd2');
+}
+
+// compareDates({ d1: new Date(2022, 4, 8), d2: new Date('2022-05-12') });
+// compareDates(new Date(2022, 4, 8), new Date(2022, 4, 8));
+
+function calcActivity(month, rate, users) {
+	let [year, mon] = month.split('-');
+	mon = Number(mon);
+	// console.log(year, mon);
+	const firstDay = new Date(year, mon - 1, 1);
+	const lastDay = new Date(year, mon, 0);
+	const daysInMonth = lastDay.getDate();
+	let dailyUsers = new Array(daysInMonth).fill(0);
+	// console.log(firstDay, lastDay);
+	const dailyRate = rate.monthlyRate / daysInMonth;
+	users.forEach((user) => {
+		// console.log(user);
+		let first = 1;
+		let last = daysInMonth;
+		user.end = user.end === null ? lastDay : user.end;
+		// console.log(user.start, user.end);
+		if (user.start === null) last = 0;
+		else if (user.start > lastDay) {
+			first = daysInMonth;
+		} else if (user.start > firstDay) {
+			first = user.start.getDate();
+		}
+		if (user.end < firstDay) {
+			last = 0
+		} else if (user.end < lastDay) {
+			last = user.end.getDate();
+		}
+		// console.log(first, last);
+		if (last) {
+			dailyUsers[first-1] += 1;
+			if (last<daysInMonth) dailyUsers[last] -= 1;
+		}
+	});
+	// console.log(dailyUsers);
+	let c = 0
+	let total = 0
+	dailyUsers.forEach((count, i) => {
+		c += count
+		total += c*dailyRate;
+		console.log(`${year}-${String(mon).padStart(2,'0')} ${c} $${c*dailyRate.toFixed(2)}`);
+	})
+	console.log(`Total: $${total.toFixed(2)}`)
+}
+
+calcActivity('2019-01', { monthlyRate: 4 }, [
+	{ id: 1, start: new Date(2018, 1, 1), end: null },
+	{ id: 1, start: new Date(2018, 1, 1), end: new Date(2018, 11, 30) },
+	{ id: 1, start: new Date(2018, 1, 1), end: new Date(2019, 0, 1) },
+	{ id: 2, start: new Date(2018, 1, 1), end: new Date(2019, 0, 15) },
+	{ id: 2, start: new Date(2019, 0, 15), end: new Date(2019, 0, 15) },
+	{ id: 3, start: new Date(2019, 0, 10), end: null },
+	{ id: 3, start: new Date(2019, 0, 31), end: null },
+	{ id: 3, start: null, end: null },
+]);
