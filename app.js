@@ -661,7 +661,7 @@ function calcActivity(month, rate, users) {
 			last = 0
 		} else if (user.end < lastDay) {
 			last = user.end.getDate();
-		}
+		}	
 		// console.log(first, last);
 		if (last) {
 			dailyUsers[first-1] += 1;
