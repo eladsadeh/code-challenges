@@ -314,17 +314,7 @@ def palindromIndex(s):
 
 # print(palindromIndex('fgnfnidynhxebxxxfmxixhsruldhsaobhlcggchboashdlurshxixmfxxxbexhnydinfngf'))    
 
-def minimumBribes(q):
-    bribes = 0
-    for i in range(len(q)):
-        displacement = q[i] - i - 1
-        if displacement > 2:
-            print("Too chaotic")
-            return
-        else:
-            bribes += displacement if displacement > 0 else 0
-    
-    print(bribes)
+
 
 # minimumBribes([1,2,5,3,7,8,6,4])
 
@@ -332,17 +322,5 @@ def maximumGap(N):
     binary = bin(N)[2:]
     return max([len(x) for x in binary.strip('0').strip('1').split('1') ])
 
-# maximumGap(328)
 
-def twoSum(nums, target):
-    map = {}
-    for i,n in enumerate(nums):
-        # check if we have the complementary index in 'map'
-        key = target - n
-        if key in map:
-            return [map[key], i]
-        else:
-            map[n] = i
-
-# twoSum([3,2,4],6)
     
