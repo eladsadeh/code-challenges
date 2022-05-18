@@ -24,3 +24,42 @@ def nested_lists(students):
 
 nested_lists([['Harry', 37.21], ['Berry', 37.21], ['Tina', 37.2], ['Akriti', 41], ['Harsh', 39]])
 nested_lists([['test1', 52], ['test2', 53], ['test3', 53], ['test4', 53]])
+
+# print formated float number
+# print("%.2f" % float(sum(student_marks[query_name])/len(student_marks[query_name])))
+
+# wrap text
+import textwrap
+def wrap(string, max_width):
+    return '\n'.join(textwrap.wrap(string, max_width))
+
+def designer_door_mat():
+    # print a pattern
+    h,w = map(int,input().split(' '))
+    mid = h//2
+    pattern = '.|.'
+    for l in range(h):
+        # if it's the middle row
+        if l == mid:
+            print('WELCOME'.center(w, '-'))
+        elif l < mid:
+            print((pattern*(l*2+1)).center(w,'-'))
+        else:
+            print((pattern*((h-l)*2-1)).center(w,'-'))
+
+    pattern = [('.|.'*(2*i + 1)).center(w, '-') for i in range(n//2)]
+    print('\n'.join(pattern + ['WELCOME'.center(w, '-')] + pattern[::-1]))
+
+    for i in range(1,h,2): 
+        print((i * ".|.").center(w, "-"))
+    print("WELCOME".center(w,"-"))
+    for i in range(h-2,-1,-2): 
+        print((i * ".|.").center(w, "-"))
+
+# format integers in different base
+def print_formatted(number):
+    w=len(bin(number)[2:])
+    for i in range(1,number+1):
+        print (str(i).rjust(w,' '),str(oct(i)[2:]).rjust(w,' '),str(hex(i)[2:].upper()).rjust(w,' '),str(bin(i)[2:]).rjust(w,' '),sep=' ')
+
+        print("{0:{width}d} {0:{width}o} {0:{width}X} {0:{width}b}".format(i, width=w))
