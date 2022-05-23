@@ -323,4 +323,13 @@ def maximumGap(N):
     return max([len(x) for x in binary.strip('0').strip('1').split('1') ])
 
 
-    
+def rotate(nums,k):
+    k = k%len(nums)
+    # better run time
+    nums = nums[-k:] + nums[:-k]
+    # better memory usage
+    # for _ in range(k):
+    #     nums.insert(0,nums.pop())
+    return nums
+
+print(rotate([1,2,3,4,5,6,7],3))
