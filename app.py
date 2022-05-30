@@ -344,4 +344,9 @@ def removeDuplicates(nums):
             
         return len(nums)
 
-print(removeDuplicates([1,1,1,1]))
+# print(removeDuplicates([1,1,1,1]))
+def countOnes(n):
+    for i in range(8):
+        print(n & 1<<i)
+
+countOnes(15)
