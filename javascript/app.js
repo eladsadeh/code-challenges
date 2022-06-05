@@ -658,34 +658,93 @@ function calcActivity(month, rate, users) {
 			first = user.start.getDate();
 		}
 		if (user.end < firstDay) {
-			last = 0
+			last = 0;
 		} else if (user.end < lastDay) {
 			last = user.end.getDate();
-		}	
+		}
 		// console.log(first, last);
 		if (last) {
-			dailyUsers[first-1] += 1;
-			if (last<daysInMonth) dailyUsers[last] -= 1;
+			dailyUsers[first - 1] += 1;
+			if (last < daysInMonth) dailyUsers[last] -= 1;
 		}
 	});
 	// console.log(dailyUsers);
-	let c = 0
-	let total = 0
+	let c = 0;
+	let total = 0;
 	dailyUsers.forEach((count, i) => {
-		c += count
-		total += c*dailyRate;
-		console.log(`${year}-${String(mon).padStart(2,'0')} ${c} $${c*dailyRate.toFixed(2)}`);
-	})
-	console.log(`Total: $${total.toFixed(2)}`)
+		c += count;
+		total += c * dailyRate;
+		console.log(
+			`${year}-${String(mon).padStart(2, '0')} ${c} $${
+				c * dailyRate.toFixed(2)
+			}`
+		);
+	});
+	console.log(`Total: $${total.toFixed(2)}`);
 }
 
-calcActivity('2019-01', { monthlyRate: 4 }, [
-	{ id: 1, start: new Date(2018, 1, 1), end: null },
-	{ id: 1, start: new Date(2018, 1, 1), end: new Date(2018, 11, 30) },
-	{ id: 1, start: new Date(2018, 1, 1), end: new Date(2019, 0, 1) },
-	{ id: 2, start: new Date(2018, 1, 1), end: new Date(2019, 0, 15) },
-	{ id: 2, start: new Date(2019, 0, 15), end: new Date(2019, 0, 15) },
-	{ id: 3, start: new Date(2019, 0, 10), end: null },
-	{ id: 3, start: new Date(2019, 0, 31), end: null },
-	{ id: 3, start: null, end: null },
-]);
+// calcActivity('2019-01', { monthlyRate: 4 }, [
+// 	{ id: 1, start: new Date(2018, 1, 1), end: null },
+// 	{ id: 1, start: new Date(2018, 1, 1), end: new Date(2018, 11, 30) },
+// 	{ id: 1, start: new Date(2018, 1, 1), end: new Date(2019, 0, 1) },
+// 	{ id: 2, start: new Date(2018, 1, 1), end: new Date(2019, 0, 15) },
+// 	{ id: 2, start: new Date(2019, 0, 15), end: new Date(2019, 0, 15) },
+// 	{ id: 3, start: new Date(2019, 0, 10), end: null },
+// 	{ id: 3, start: new Date(2019, 0, 31), end: null },
+// 	{ id: 3, start: null, end: null },
+// ]);
+
+// function sum(a) {
+
+// 	return function (b) {
+// 		return a + b;
+// 	};
+// }
+
+// let sum1 = sum(2)(-3);
+
+function sum(a) {
+	sum.current = (sum.current ?? 0) + a;
+	sum.toString = () => sum.current;
+	return sum;
+// 	let currentSum = a;
+// console.log(currentSum);
+// 	function f(b) {
+// 		// console.log(currentSum);
+// 		currentSum += b;
+// 		return f;
+// 	}
+
+// 	f.toString = function () {
+// 		return currentSum;
+// 	};
+
+// 	return f;
+}
+
+// console.log(sum(2)(3)(-1).toString());
+// console.log(sum(5)(-1));
+
+function printNumbers(from, to) {
+	let num = from;
+	let id = setInterval(() => {
+		console.log(num);
+		if (num === to) clearInterval(id)
+		num++
+		
+	}, 1000);
+}
+
+function printNumbersTimer(from,to) {
+	let num = from;
+	setTimeout(function wait() {
+		console.log(num);
+		num++
+		if (num <= to) {
+			setTimeout(wait, 1000);
+		}
+	}, 1000);
+	
+}
+
+printNumbersTimer(4,9)
