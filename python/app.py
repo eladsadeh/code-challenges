@@ -350,3 +350,5 @@ def countOnes(n):
         print(n & 1<<i)
 
 countOnes(15)
+
+
