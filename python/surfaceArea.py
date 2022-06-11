@@ -10,10 +10,11 @@ def surfaceArea(A):
     for r in range(n):
         s = 2*m # bottom and top always exposed
         for c in range(m):
-            s += A[r][c] if r-1<0 else max(A[r][c]-A[r-1][c],0)
-            s += A[r][c] if r+1>=n else max(A[r][c]-A[r+1][c],0)
-            s += A[r][c] if c-1<0 else max(A[r][c]-A[r][c-1],0)
-            s += A[r][c] if c+1>=m else max(A[r][c]-A[r][c+1],0)
+            el = A[r][c]
+            s += el if r-1<0 else max(el-A[r-1][c],0)
+            s += el if r+1>=n else max(el-A[r+1][c],0)
+            s += el if c-1<0 else max(el-A[r][c-1],0)
+            s += el if c+1>=m else max(el-A[r][c+1],0)
         
         surface += s
 
