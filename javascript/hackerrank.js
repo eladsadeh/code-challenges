@@ -1,3 +1,4 @@
+// https://www.hackerrank.com/challenges/bomber-man/problem
 function bomberMan(n, grid) {
 	// in the first second nothing happen
 	if (n < 2) return grid;
