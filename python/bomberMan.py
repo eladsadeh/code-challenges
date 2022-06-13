@@ -1,7 +1,7 @@
 # https://www.hackerrank.com/challenges/bomber-man/problem
 
 def bomberMan(n, grid):
-    # return the grid after explosion
+    # helper function return the grid after explosion
     def explodeGrid(grid,x,y):
     # initialize to grid full of bombs
         exploded = [list('O'*x) for _ in range(y)]
@@ -27,12 +27,10 @@ def bomberMan(n, grid):
         return ['O' * x] * y
     # return the grid after first explosion for every
     # forth second from 3 on (3,7,11,...)
+    # or the grid after second explotion
     first_explosion = explodeGrid(grid,x,y)
-    if n%4 == 3:
-        return first_explosion
-    # return the grid after second explosion for every
-    # forth second from 5 on (5,9,13,...)
-    return explodeGrid(first_explosion,x,y)
+    return first_explosion if n%4==3 else explodeGrid(first_explosion,x,y)
+
 
 print(bomberMan(3, [
 		'.......',
