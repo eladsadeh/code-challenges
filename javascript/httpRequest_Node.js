@@ -1,3 +1,4 @@
+// HTTP request from server (Node.js)
 async function fetchData(url) {
 	const https = require('https');
 	return new Promise((resolve, reject) => {

@@ -1,4 +1,5 @@
-var lengthOfLongestSubstring = function (s) {
+// leetcode.com/problems/longest-substring-without-repeating-characters/
+https: var lengthOfLongestSubstring = function (s) {
 	if (s === '') return 0;
 	cMap = {};
 	p = -1;
