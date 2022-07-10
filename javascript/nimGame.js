@@ -3,3 +3,5 @@
 function nimGame(pile) {
 	return pile.reduce((xor, hight) => (xor ^= hight)) ? 'First' : 'Second';
 }
+
+// https://www.hackerrank.com/challenges/misere-nim-1/problem
